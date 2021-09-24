@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /src
+COPY ["ScooterApi/ScooterApi.csproj", "ScooterApi/"]
+COPY ["ScooterApi.Data/ScooterApi.Data.csproj", "ScooterApi.Data/"]
+COPY ["ScooterApi.Domain/ScooterApi.Domain.csproj", "ScooterApi.Domain/"]
+COPY ["ScooterApi.Service/ScooterApi.Service.csproj", "ScooterApi.Service/"]
+COPY ["ScooterApi.Messaging.Send/ScooterApi.Messaging.Send.csproj", "ScooterApi.Messaging.Send/"]
+COPY ["*.props", "./"]
+
+RUN dotnet restore "ScooterApi/ScooterApi.csproj"
+COPY . .
+
+RUN dotnet build "ScooterApi/ScooterApi.csproj" -c Release -o /app/build --no-restore
+
+FROM build AS publish
+RUN dotnet publish "ScooterApi/ScooterApi.csproj" --no-restore -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "ScooterApi.dll"]

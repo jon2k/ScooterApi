@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://+:80
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 80
+
+WORKDIR /src
+COPY ["ScooterApi.Data/ScooterApi.Data.csproj", "ScooterApi.Data/"]
+COPY ["ScooterApi.Domain/ScooterApi.Domain.csproj", "ScooterApi.Domain/"]
+COPY ["ScooterApi.Messaging.Send/ScooterApi.Messaging.Send.csproj", "ScooterApi.Messaging.Send/"]
+COPY ["ScooterApi.Service/ScooterApi.Service.csproj", "ScooterApi.Service/"]
+COPY ["ScooterApi/ScooterApi.csproj", "ScooterApi/"]
+
+RUN dotnet restore "ScooterApi/ScooterApi.csproj"
+COPY . .
+WORKDIR "/src/ScooterApi"
+RUN dotnet build --no-restore "ScooterApi.csproj" -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION --" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
