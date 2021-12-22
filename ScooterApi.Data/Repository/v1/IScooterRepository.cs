@@ -8,5 +8,6 @@ namespace ScooterApi.Data.Repository.v1
     public interface IScooterRepository: IRepository<Scooter>
     {
         Task<List<Scooter>> GetScooterByIdAsync(int id, CancellationToken cancellationToken);
+        Task<Coordinate> GetLastCoordinateAsync(CancellationToken cancellationToken);
     }
 }

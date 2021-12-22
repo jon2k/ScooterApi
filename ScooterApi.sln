@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScooterApi.Messaging.Send",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScooterApi.Service", "ScooterApi.Service\ScooterApi.Service.csproj", "{4B5E2A82-57E9-4413-BFD7-059412568FA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScooterApi.Address.Yandex", "ScooterApi.Address.Yandex\ScooterApi.Address.Yandex.csproj", "{9657CE15-9F09-4756-9540-4DDBC2BCD824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{4B5E2A82-57E9-4413-BFD7-059412568FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B5E2A82-57E9-4413-BFD7-059412568FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B5E2A82-57E9-4413-BFD7-059412568FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9657CE15-9F09-4756-9540-4DDBC2BCD824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9657CE15-9F09-4756-9540-4DDBC2BCD824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9657CE15-9F09-4756-9540-4DDBC2BCD824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9657CE15-9F09-4756-9540-4DDBC2BCD824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

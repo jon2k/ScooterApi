@@ -95,5 +95,26 @@ namespace ScooterApi.Controllers.v1
                 return BadRequest(ex.Message);
             }
         }
+        
+        /// <summary>
+        /// Action to see current address from scooters.
+        /// </summary>
+        /// <returns>Returns a current address from scooters</returns>
+        /// <response code="200">Returned if current address from scooter were loaded</response>
+        /// <response code="400">Returned if current address from scooter couldn't be loaded</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
+        public async Task<ActionResult<Address>> GetCurrentAddress()
+        {
+            try
+            {
+                return await _mediator.Send(new GetAddressQuery());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

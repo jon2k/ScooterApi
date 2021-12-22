@@ -111,6 +111,7 @@ namespace ScooterApi
             services.AddTransient<IRequestHandler<UpdateScooterCommand, Scooter>, UpdateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<GetScooterByIdQuery, List<Scooter>>, GetScooterByIdQueryHandler>();
             services.AddTransient<IRequestHandler<GetScootersQuery, List<Scooter>>, GetScootersQueryHandler>();
+            services.AddHttpClient<IGetAddress, GetterAddress>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
