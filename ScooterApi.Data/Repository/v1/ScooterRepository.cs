@@ -20,9 +20,12 @@ namespace ScooterApi.Data.Repository.v1
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<Coordinate> GetLastCoordinateAsync(CancellationToken cancellationToken)
+        public async Task<Coordinate> GetLastCoordinateAsync(int id, CancellationToken cancellationToken)
         {
-            var scooter= await ScooterContext.Scooter.OrderBy(s => s.Time).FirstOrDefaultAsync();
+            var scooter= await ScooterContext.Scooter
+                .Where(s=>s.ScooterId==id)
+                . OrderBy(s => s.Time)
+                .FirstOrDefaultAsync(cancellationToken: cancellationToken);
             return scooter.Coordinate;
         }
     }

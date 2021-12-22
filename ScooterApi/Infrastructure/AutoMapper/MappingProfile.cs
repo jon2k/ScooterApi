@@ -10,8 +10,8 @@ namespace ScooterApi.Infrastructure.AutoMapper
         {
             CreateMap<DataFromScooterModel, Scooter>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(x=>x.CoordinateX,opt=>opt.MapFrom(x=>x.Coordinate.X))
-                .ForMember(x=>x.CoordinateY,opt=>opt.MapFrom(x=>x.Coordinate.Y))
+                .ForMember(x=>x.Coordinate.X,opt=>opt.MapFrom(x=>x.Coordinate.X))
+                .ForMember(x=>x.Coordinate.Y,opt=>opt.MapFrom(x=>x.Coordinate.Y))
                 ;
            
         }

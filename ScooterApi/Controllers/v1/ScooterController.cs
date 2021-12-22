@@ -104,12 +104,13 @@ namespace ScooterApi.Controllers.v1
         /// <response code="400">Returned if current address from scooter couldn't be loaded</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet]
-        public async Task<ActionResult<Address>> GetCurrentAddress()
+        [HttpGet ("id:int")]
+        public async Task<ActionResult<Domain.Entities.Address.Address>> GetCurrentAddress(int id)
         {
             try
             {
-                return await _mediator.Send(new GetAddressQuery());
+                return await _mediator.Send(new GetCurrentAddressQuery() 
+                    {Id = id});
             }
             catch (Exception ex)
             {

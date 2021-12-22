@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>d9aedf8e-7b4a-424a-ad72-94bd39c6dc89</UserSecretsId>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>obj\Debug\net5.0\ScooterApi.xml</DocumentationFile>
+    <DocumentationFile>obj\Debug\net6.0\ScooterApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>obj\Debug\net5.0\ScooterApi.xml</DocumentationFile>
+    <DocumentationFile>obj\Debug\net6.0\ScooterApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ScooterApi.Address.Yandex\ScooterApi.Address.Yandex.csproj" />
     <ProjectReference Include="..\ScooterApi.Data\ScooterApi.Data.csproj" />
     <ProjectReference Include="..\ScooterApi.Domain\ScooterApi.Domain.csproj" />
     <ProjectReference Include="..\ScooterApi.Messaging.Send\ScooterApi.Messaging.Send.csproj" />

@@ -2,23 +2,25 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Azure;
+using ScooterApi.Address.Yandex.Yandex.v1;
 using ScooterApi.Data.Repository.v1;
+using ScooterApi.Domain.Entities.Address;
 
 namespace ScooterApi.Service.v1.Query;
 
-public class GetCurrentAddressQueryHandler: IRequestHandler<GetCurrentAddressQuery, Address>
+public class GetCurrentAddressQueryHandler: IRequestHandler<GetCurrentAddressQuery, Domain.Entities.Address.Address>
 {
     private readonly IScooterRepository _scooterRepository;
-    private readonly IGetAddress _getAddress;
-    public GetCurrentAddressQueryHandler(IScooterRepository scooterRepository, IGetAddress getAddress)
+    private readonly IAddressService _addressService;
+    public GetCurrentAddressQueryHandler(IScooterRepository scooterRepository, IAddressService addressService)
     {
         _scooterRepository = scooterRepository;
-        _getAddress = getAddress;
+        _addressService = addressService;
     }
 
-    public async Task<Address> Handle(GetCurrentAddressQuery request, CancellationToken cancellationToken)
+    public async Task<Domain.Entities.Address.Address> Handle(GetCurrentAddressQuery request, CancellationToken cancellationToken)
     {
-        var coordinate = await _scooterRepository.GetLastCoordinateAsync(cancellationToken);
-        return await _getAddress.AddServiceBusClient(coordinate);
+        var coordinate = await _scooterRepository.GetLastCoordinateAsync(request.Id, cancellationToken);
+        return await _addressService.GetAddressAsync(coordinate, cancellationToken);
     }
 }

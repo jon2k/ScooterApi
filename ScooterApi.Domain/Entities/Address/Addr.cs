@@ -129,7 +129,7 @@ namespace ScooterApi.Domain.Entities.Address;
         public GeoObjectCollection GeoObjectCollection { get; set; }
     }
 
-    public class Root
+    public class Addr
     {
         public Response response { get; set; }
     }

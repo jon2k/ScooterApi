@@ -1,13 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using ScooterApi.Domain.Entities;
 
 namespace ScooterApi.Models.v1
 {
-    public class Coordinate
-    {
-        public float X { get; set; }
-        public float Y { get; set; }
-    }
     public class DataFromScooterModel
     {
         [Required]

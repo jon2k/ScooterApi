@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using Microsoft.Azure.Amqp.Framing;
 
 namespace ScooterApi.Service.v1.Query;
 
-public class GetCurrentAddressQuery: IRequest<Address>
+public class GetCurrentAddressQuery : IRequest<Domain.Entities.Address.Address>
 {
-    
+    public int Id { get; set; }
 }
