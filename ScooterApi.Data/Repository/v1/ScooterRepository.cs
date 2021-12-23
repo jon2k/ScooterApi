@@ -23,8 +23,7 @@ namespace ScooterApi.Data.Repository.v1
         public async Task<Coordinate> GetLastCoordinateAsync(int id, CancellationToken cancellationToken)
         {
             var scooter= await ScooterContext.Scooter
-                .Where(s=>s.ScooterId==id)
-                . OrderBy(s => s.Time)
+                . OrderByDescending(s => s.Id)
                 .FirstOrDefaultAsync(cancellationToken: cancellationToken);
             return scooter.Coordinate;
         }
