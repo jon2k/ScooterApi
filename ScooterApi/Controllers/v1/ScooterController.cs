@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScooterApi.Domain.Entities;
+using ScooterApi.Domain.Entities.Address;
 using ScooterApi.Models.v1;
 using ScooterApi.Service.v1.Command;
 using ScooterApi.Service.v1.Query;
@@ -107,7 +108,7 @@ namespace ScooterApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet ("idScooter:int")]
         [HttpGet("GetCurrentAddress/{id:int}")] 
-        public async Task<ActionResult<Domain.Entities.Address.Address>> GetCurrentAddress(int id)
+        public async Task<ActionResult<AddressScooter>> GetCurrentAddress(int id)
         {
             Console.WriteLine("Get GetCurrentAddress/id");
             try

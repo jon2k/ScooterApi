@@ -19,6 +19,7 @@ using ScooterApi.Address.Yandex.Yandex.v1;
 using ScooterApi.Data.Database;
 using ScooterApi.Data.Repository.v1;
 using ScooterApi.Domain.Entities;
+using ScooterApi.Domain.Entities.Address;
 using ScooterApi.Messaging.Send.Options.v1;
 using ScooterApi.Messaging.Send.Sender.v1;
 using ScooterApi.Models.v1;
@@ -102,11 +103,12 @@ namespace ScooterApi
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IScooterRepository, ScooterRepository>();
             services.AddTransient<IValidator<DataFromScooterModel>, DataFromScooterModelValidator>();
+            services.AddTransient<IValidator<Coordinate>, DataFromCoordinateValidator>();
             services.AddSingleton<IScooterAddSender, ScooterAddSender>();
             services.AddTransient<IRequestHandler<CreateScooterCommand, Scooter>, CreateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateScooterCommand, Scooter>, UpdateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<GetScooterByIdQuery, List<Scooter>>, GetScooterByIdQueryHandler>();
-            services.AddTransient<IRequestHandler<GetCurrentAddressQuery, Domain.Entities.Address.Address>, GetCurrentAddressQueryHandler>();
+            services.AddTransient<IRequestHandler<GetCurrentAddressQuery, AddressScooter>, GetCurrentAddressQueryHandler>();
             services.AddTransient<IRequestHandler<GetScootersQuery, List<Scooter>>, GetScootersQueryHandler>();
             services.AddHttpClient<IAddressService, AddressService>();
         }

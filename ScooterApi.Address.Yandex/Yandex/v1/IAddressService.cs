@@ -5,5 +5,5 @@ namespace ScooterApi.Address.Yandex.Yandex.v1;
 
 public interface IAddressService
 {
-    Task<Domain.Entities.Address.Address> GetAddressAsync(Coordinate coordinate, CancellationToken cancellationToken);
+    Task<AddressScooter> GetAddressAsync(Coordinate coordinate, CancellationToken cancellationToken);
 }

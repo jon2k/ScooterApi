@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Globalization;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using ScooterApi.Address.Yandex.Options.v1;
 using ScooterApi.Domain.Entities;
@@ -19,12 +20,11 @@ public class AddressService : IAddressService
         _keyApiYandexMaps = yandexMapOptions.Value.KeyApiYandexMaps;
     }
 
-    public async Task<Domain.Entities.Address.Address> GetAddressAsync(Coordinate coordinate, CancellationToken cancellationToken)
+    public async Task<AddressScooter> GetAddressAsync(Coordinate coordinate, CancellationToken cancellationToken)
     {
-        var uri = $"{_uri}{_keyApiYandexMaps}&geocode={coordinate.X},{coordinate.Y}";
-        var responseString = await _httpClient.GetStringAsync(
-            $"{_uri}{_keyApiYandexMaps}&geocode={coordinate.X},{coordinate.Y}", cancellationToken);
-        var address = JsonConvert.DeserializeObject<Domain.Entities.Address.Address>(responseString);
+        var uri = $"{_uri}{_keyApiYandexMaps}&geocode={coordinate.X.ToString(CultureInfo.InvariantCulture)},{coordinate.Y.ToString(CultureInfo.InvariantCulture)}";
+        var responseString = await _httpClient.GetStringAsync(uri, cancellationToken);
+        var address = JsonConvert.DeserializeObject<AddressScooter>(responseString);
         return address;
     }
 }

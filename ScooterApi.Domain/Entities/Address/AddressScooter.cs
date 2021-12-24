@@ -27,7 +27,7 @@ namespace ScooterApi.Domain.Entities.Address;
         public string name { get; set; }
     }
 
-    public class Address
+    public class Addr
     {
         public string country_code { get; set; }
         public string formatted { get; set; }
@@ -89,7 +89,7 @@ namespace ScooterApi.Domain.Entities.Address;
         public string precision { get; set; }
         public string text { get; set; }
         public string kind { get; set; }
-        public Address Address { get; set; }
+        public Addr Address { get; set; }
         public AddressDetails AddressDetails { get; set; }
     }
 
@@ -129,7 +129,7 @@ namespace ScooterApi.Domain.Entities.Address;
         public GeoObjectCollection GeoObjectCollection { get; set; }
     }
 
-    public class Addr
+    public class AddressScooter
     {
         public Response response { get; set; }
     }
