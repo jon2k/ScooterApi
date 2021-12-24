@@ -8,7 +8,8 @@ namespace ScooterApi.Domain.Entities
         public int ScooterId { get; set; }
         public bool InUse { get; set; }
         public byte ChargePercent { get; set; }
-        public Coordinate Coordinate { get; set; }
+        public double CoordinateX { get; set; }
+        public double CoordinateY { get; set; }
         public DateTime Time { get; set; }
     }
 }

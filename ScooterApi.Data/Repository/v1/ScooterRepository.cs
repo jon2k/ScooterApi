@@ -25,7 +25,7 @@ namespace ScooterApi.Data.Repository.v1
             var scooter= await ScooterContext.Scooter
                 . OrderByDescending(s => s.Id)
                 .FirstOrDefaultAsync(cancellationToken: cancellationToken);
-            return scooter.Coordinate;
+            return new Coordinate(){X = scooter.CoordinateX, Y = scooter.CoordinateY};
         }
     }
 }

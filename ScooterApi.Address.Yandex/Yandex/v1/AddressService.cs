@@ -21,6 +21,7 @@ public class AddressService : IAddressService
 
     public async Task<Domain.Entities.Address.Address> GetAddressAsync(Coordinate coordinate, CancellationToken cancellationToken)
     {
+        var uri = $"{_uri}{_keyApiYandexMaps}&geocode={coordinate.X},{coordinate.Y}";
         var responseString = await _httpClient.GetStringAsync(
             $"{_uri}{_keyApiYandexMaps}&geocode={coordinate.X},{coordinate.Y}", cancellationToken);
         var address = JsonConvert.DeserializeObject<Domain.Entities.Address.Address>(responseString);

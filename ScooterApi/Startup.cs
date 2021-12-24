@@ -106,6 +106,7 @@ namespace ScooterApi
             services.AddTransient<IRequestHandler<CreateScooterCommand, Scooter>, CreateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateScooterCommand, Scooter>, UpdateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<GetScooterByIdQuery, List<Scooter>>, GetScooterByIdQueryHandler>();
+            services.AddTransient<IRequestHandler<GetCurrentAddressQuery, Domain.Entities.Address.Address>, GetCurrentAddressQueryHandler>();
             services.AddTransient<IRequestHandler<GetScootersQuery, List<Scooter>>, GetScootersQueryHandler>();
             services.AddHttpClient<IAddressService, AddressService>();
         }

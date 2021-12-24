@@ -1,10 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.Azure;
 using ScooterApi.Address.Yandex.Yandex.v1;
 using ScooterApi.Data.Repository.v1;
-using ScooterApi.Domain.Entities.Address;
 
 namespace ScooterApi.Service.v1.Query;
 
