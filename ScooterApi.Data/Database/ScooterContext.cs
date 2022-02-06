@@ -63,12 +63,19 @@ namespace ScooterApi.Data.Database
         {
             modelBuilder.Entity<Scooter>(entity =>
             {
-                entity.Property(e => e.ScooterId).IsRequired();
-                entity.Property(e => e.Time).IsRequired();
-                entity.Property(e => e.ChargePercent).IsRequired();
-                entity.Property(e => e.CoordinateX).IsRequired();
-                entity.Property(e => e.CoordinateY).IsRequired();
-                entity.Property(e => e.InUse).IsRequired();
+                entity.Property(e => e.ScooterId)
+                    .IsRequired()
+                    .ValueGeneratedNever();
+                entity.Property(e => e.Time)
+                    .IsRequired();
+                entity.Property(e => e.ChargePercent)
+                    .IsRequired();
+                entity.Property(e => e.CoordinateX)
+                    .IsRequired();
+                entity.Property(e => e.CoordinateY)
+                    .IsRequired();
+                entity.Property(e => e.InUse)
+                    .IsRequired();
             });
         }
     }
