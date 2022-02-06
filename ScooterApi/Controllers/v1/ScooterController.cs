@@ -55,9 +55,10 @@ namespace ScooterApi.Controllers.v1
         /// <response code="400">Returned if data from concrete scooter couldn't be loaded</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet ("id:int")]
+        [HttpGet("Scooters/{id:int}")] 
         public async Task<ActionResult<List<Scooter>>> Scooters(int id)
         {
+            Console.WriteLine("Get Scooters/id");
             try
             {
                 return await _mediator.Send(new GetScooterByIdQuery()
@@ -89,6 +90,30 @@ namespace ScooterApi.Controllers.v1
                 {
                     Scooter = _mapper.Map<Scooter>(dataFromScooterModel)
                 });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// Action to see current address from scooters.
+        /// </summary>
+        /// <returns>Returns a current address from scooters</returns>
+        /// <response code="200">Returned if current address from scooter were loaded</response>
+        /// <response code="400">Returned if current address from scooter couldn't be loaded</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[HttpGet ("idScooter:int")]
+        [HttpGet("GetCurrentAddress/{id:int}")] 
+        public async Task<ActionResult<Domain.Entities.Address.Address>> GetCurrentAddress(int id)
+        {
+            Console.WriteLine("Get GetCurrentAddress/id");
+            try
+            {
+                return await _mediator.Send(new GetCurrentAddressQuery() 
+                    {Id = id});
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using ScooterApi.Domain.Entities;
 using ScooterApi.Models.v1;
 
 namespace ScooterApi.Validators.v1

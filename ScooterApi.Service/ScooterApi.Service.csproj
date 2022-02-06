@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ScooterApi.Address.Yandex\ScooterApi.Address.Yandex.csproj" />
     <ProjectReference Include="..\ScooterApi.Data\ScooterApi.Data.csproj" />
     <ProjectReference Include="..\ScooterApi.Messaging.Send\ScooterApi.Messaging.Send.csproj" />
   </ItemGroup>

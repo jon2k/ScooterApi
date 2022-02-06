@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ScooterApi.Address.Yandex.Options.v1;
+using ScooterApi.Address.Yandex.Yandex.v1;
 using ScooterApi.Data.Database;
 using ScooterApi.Data.Repository.v1;
 using ScooterApi.Domain.Entities;
@@ -39,9 +41,9 @@ namespace ScooterApi
         {
             services.AddHealthChecks();
             services.AddOptions();
-
-            var serviceClientSettingsConfig = Configuration.GetSection("RabbitMq");
-            services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
+            
+            services.Configure<RabbitMqConfiguration>(Configuration.GetSection("RabbitMq"));
+            services.Configure<YandexMapApiConfiguration>(Configuration.GetSection("YandexMapApi"));
 
             bool.TryParse(Configuration["BaseServiceSettings:UseInMemoryDatabase"], out var useInMemory);
 
@@ -59,9 +61,7 @@ namespace ScooterApi
             }
 
             services.AddAutoMapper(typeof(Startup));
-
             services.AddMvc().AddFluentValidation();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -99,18 +99,16 @@ namespace ScooterApi
             });
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IScooterRepository, ScooterRepository>();
-
             services.AddTransient<IValidator<DataFromScooterModel>, DataFromScooterModelValidator>();
-            
             services.AddSingleton<IScooterAddSender, ScooterAddSender>();
-
             services.AddTransient<IRequestHandler<CreateScooterCommand, Scooter>, CreateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateScooterCommand, Scooter>, UpdateScooterCommandHandler>();
             services.AddTransient<IRequestHandler<GetScooterByIdQuery, List<Scooter>>, GetScooterByIdQueryHandler>();
+            services.AddTransient<IRequestHandler<GetCurrentAddressQuery, Domain.Entities.Address.Address>, GetCurrentAddressQueryHandler>();
             services.AddTransient<IRequestHandler<GetScootersQuery, List<Scooter>>, GetScootersQueryHandler>();
+            services.AddHttpClient<IAddressService, AddressService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
